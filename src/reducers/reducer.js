@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import timeReducer from './timeReducer';
+import topicReducer from './topicReducer';
 
 const reducer = combineReducers({
-    time: timeReducer
+    topic: topicReducer
 });
 
 export default reducer;

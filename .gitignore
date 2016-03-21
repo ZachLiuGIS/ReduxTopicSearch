@@ -3,3 +3,6 @@
 *.log
 npm-debug.log*
 node_modules
+
+# api keys
+api_keys.js
