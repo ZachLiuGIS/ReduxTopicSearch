@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from django_twitter.utils import get_twitter_trend_topics, TwitterAPIQueryError
+from django_twitter.utils import get_twitter_trend_topics, search_tweets, TwitterAPIQueryError
 
 
 class TwitterTrendView(APIView):
@@ -13,9 +13,25 @@ class TwitterTrendView(APIView):
             trends = get_twitter_trend_topics()
 
         except TwitterAPIQueryError:
-            return Response('API Search Error', status=status.HTTP_400_BAD_REQUEST)
+            return Response('Twitter API Search Error', status=status.HTTP_400_BAD_REQUEST)
 
         return Response(trends, content_type='application/json')
+
+
+class TwitterSearchView(APIView):
+
+    def get(self, request, format=None):
+
+        try:
+            options = request.query_params
+            tweets = search_tweets(options)
+            print(tweets)
+
+        except TwitterAPIQueryError:
+            return Response('Twitter API Search Error', status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(tweets, content_type='application/json')
+
 
 # class SearchTopicView(APIView):
 #

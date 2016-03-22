@@ -7,10 +7,6 @@ class TwitterAPIQueryError(Exception):
         pass
 
 
-class WikiAPIQueryError(Exception):
-        pass
-
-
 def format_date(date_):
     lst = date_.split(' ')
     lst.pop(-2)
@@ -77,36 +73,17 @@ def get_twitter_trend_topics():
     return items
 
 
-def search_twitter_by_term(term, geo_search=False, lat="", lng=""):
+def search_tweets(options):
     consumer_key = TWITTER_API_KEYS['consumer_key']
     consumer_secret = TWITTER_API_KEYS['consumer_secret']
     access_token_key = TWITTER_API_KEYS['access_token_key']
     access_token_secret = TWITTER_API_KEYS['access_token_secret']
     api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret)
 
-    lang = 'en'
-    count = 10
-
     try:
-        items = []
-        options = {'q': term, 'lang': lang, 'count': count}
-        if geo_search and lat and lng:
-            options['geocode'] = lat + ',' + lng + ',100mi'
-
         r = list(api.request('search/tweets', options))
+        return r
 
-        for item in r:
-            if 'text' in item and 'created_at' in item and 'user' in item:
-                text = process_twitter_text(item['text'])
-                created_at = format_date(item['created_at'])
-                user_name = item['user']['name']
-                user_screen_name = item['user']['screen_name']
-                profile_url = item['user']['profile_image_url']
-
-                item = TwitterItem(text, created_at, user_name, user_screen_name, profile_url)
-                items.append(item)
     except:
         raise TwitterAPIQueryError
-
-    return items
 
