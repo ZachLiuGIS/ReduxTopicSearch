@@ -6,10 +6,10 @@ module.exports = {
     entry: [
         'webpack/hot/dev-server',
         'webpack-hot-middleware/client',
-        './src/main.js'
+        './react_src/main.js'
     ],
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'static'),
         filename: "bundle.js",
         publicPath: '/'
     },
