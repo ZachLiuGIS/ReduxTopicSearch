@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TwitterContentContainer from '../containers/TwitterContentContainer';
 import TopicsSidebar from './TopicsSidebar';
-import SearchBox from './SearchBox';
+import SearchBoxContainer from '../containers/SearchBoxContainer';
 
 class MainContent extends Component {
     render() {
@@ -9,7 +9,7 @@ class MainContent extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-8">
-                        <SearchBox/>
+                        <SearchBoxContainer/>
                         <TwitterContentContainer/>
                     </div>
                     <div className="col-md-4">

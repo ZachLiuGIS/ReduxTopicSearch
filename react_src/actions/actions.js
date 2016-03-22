@@ -3,9 +3,6 @@ import actionTypes from '../constants/actionTypes';
 import constants from '../constants/constants';
 import { buildQueryParams } from '../utils/utils';
 
-let Twitter = require('twitter-node-client').Twitter;
-console.log(Twitter);
-
 export default {
     selectTopic(topic) {
         return {
@@ -25,7 +22,15 @@ export default {
         return {
             type: actionTypes.REQUEST_TWEETS_SUCCESS,
             topic,
-            response
+            items: response.map(item => {
+                return {
+                    username: item.user.name,
+                    screenname: item.user.screen_name,
+                    profileUrl: item.user.profile_image_url,
+                    createdAt: item.created_at,
+                    text: item.text
+                }
+            })
         };
     },
 
@@ -38,13 +43,12 @@ export default {
     },
 
     fetchTweets(topic) {
-        let params = buildQueryParams({q: topic});
+        let params = buildQueryParams({q: topic, count: 5});
         return dispatch => {
-            dispatch(requestTweets(topic));
+            dispatch(this.requestTweets(topic));
             return fetch(constants.TWITTER_SEARCH_URL + '?' + params)
                 .then(response => response.json())
-                .then(json => dispatch(actions.requestTweetsSuccess(topic, json)))
-                .catch(error => dispatch(actions.requestTweetsError(topic, error)));
+                .then(json => dispatch(this.requestTweetsSuccess(topic, json)));
         };
     }
 };

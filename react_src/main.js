@@ -21,12 +21,15 @@ const store = createStore(
     applyMiddleware(...middleware)
 );
 
+//import actions from './actions/actions';
+//store.dispatch(actions.fetchTweets('Linsanity'));
+
 // This is required for hot module replacement!
-if (production) {
-    if (module.hot) {
-        module.hot.accept();
-    }
-}
+//if (production) {
+//    if (module.hot) {
+//        module.hot.accept();
+//    }
+//}
 
 // get root element
 const root = document.getElementById('root');

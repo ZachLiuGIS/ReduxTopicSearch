@@ -1,4 +1,4 @@
 export default {
     APP_NAME: 'REACT_REDUX',
-    TWITTER_SEARCH_URL: 'https://api.twitter.com/1.1/search/tweets.json'
+    TWITTER_SEARCH_URL: 'http://localhost:8000/django_twitter/api/search_tweets'
 }

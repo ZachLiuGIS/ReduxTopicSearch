@@ -25,7 +25,6 @@ class TwitterSearchView(APIView):
         try:
             options = request.query_params
             tweets = search_tweets(options)
-            print(tweets)
 
         except TwitterAPIQueryError:
             return Response('Twitter API Search Error', status=status.HTTP_400_BAD_REQUEST)
