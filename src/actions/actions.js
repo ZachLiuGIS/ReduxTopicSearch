@@ -3,6 +3,9 @@ import actionTypes from '../constants/actionTypes';
 import constants from '../constants/constants';
 import { buildQueryParams } from '../utils/utils';
 
+let Twitter = require('twitter-node-client').Twitter;
+console.log(Twitter);
+
 export default {
     selectTopic(topic) {
         return {

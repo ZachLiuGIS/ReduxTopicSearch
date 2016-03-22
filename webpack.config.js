@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
-    entry:  [
+    entry: [
         'webpack/hot/dev-server',
         'webpack-hot-middleware/client',
         './src/main.js'
@@ -18,10 +18,13 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin()
     ],
     module: {
-        loaders: [{
-            test: /\.jsx?$/,
-            loaders: ['babel'],
-            exclude: /node_modules/
-        }]
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                loaders: ['babel'],
+                exclude: /node_modules/
+            },
+            {test: /\.json$/, loader: "json-loader"}
+        ]
     }
 };

@@ -37,5 +37,4 @@ const AppContainer = () => (
     </Provider>
 );
 
-
 ReactDOM.render(<AppContainer/>, root);
