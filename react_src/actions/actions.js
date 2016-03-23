@@ -1,7 +1,7 @@
 import actions from '../actions/actions';
 import actionTypes from '../constants/actionTypes';
 import constants from '../constants/constants';
-import { buildQueryParams } from '../utils/utils';
+import { buildQueryParams, processTweetText } from '../utils/utils';
 
 export default {
     selectTopic(topic) {
@@ -28,7 +28,7 @@ export default {
                     screenname: item.user.screen_name,
                     profileUrl: item.user.profile_image_url,
                     createdAt: item.created_at,
-                    text: item.text
+                    text: processTweetText(item.text)
                 }
             })
         };
@@ -43,7 +43,7 @@ export default {
     },
 
     fetchTweets(topic) {
-        let params = buildQueryParams({q: topic, count: 5});
+        let params = buildQueryParams({q: topic, count: 10});
         return dispatch => {
             dispatch(this.requestTweets(topic));
             return fetch(constants.TWITTER_SEARCH_URL + '?' + params)

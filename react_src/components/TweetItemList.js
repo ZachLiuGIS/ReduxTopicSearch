@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import actions from '../actions/actions';
+import TweetItem from './TweetItem';
 
 class TweetItemList extends Component {
 
@@ -11,10 +12,13 @@ class TweetItemList extends Component {
     }
 
     render() {
+        let tweetList = this.props.items.map((item, index)=> {
+            return <TweetItem key={index} {...item} />
+        });
         return(
             <div>
                 <h3>Topic: {this.props.topic}</h3>
-                <div>{JSON.stringify(this.props.items)}</div>
+                <div className="list-group">{tweetList}</div>
             </div>
         )
     }
