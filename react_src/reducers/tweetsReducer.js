@@ -4,27 +4,29 @@ import actionTypes from '../constants/actionTypes';
 
 const tweets = (state = {
     isFetching: false,
-    items: []
+    items: [],
+    valid: true
 }, action) => {
     switch (action.type) {
 
         case actionTypes.INVALIDATE_TOPIC:
             return update(state, {
-                didInvalidate: {$set: true}
+                valid: {$set: false}
             });
 
         case actionTypes.REQUEST_TWEETS:
             return update(state, {
                 isFetching: {$set: true},
-                didInvalidate: {$set: false}
+                valid: {$set: true}
             });
 
         case actionTypes.REQUEST_TWEETS_SUCCESS:
             return update(state, {
+                valid: {$set: true},
                 isFetching: {$set: false},
                 items: {$set: action.items},
-                receivedAt: {$set: action.receivedAt},
-                didInvalidate: {$set: false}
+                receivedAt: {$set: action.receivedAt}
+
             });
         default:
             return state
@@ -33,6 +35,7 @@ const tweets = (state = {
 
 const tweetsReducer = (state = {}, action) => {
     switch (action.type) {
+        case actionTypes.INVALIDATE_TOPIC:
         case actionTypes.REQUEST_TWEETS:
         case actionTypes.REQUEST_TWEETS_SUCCESS:
             return update(state, {

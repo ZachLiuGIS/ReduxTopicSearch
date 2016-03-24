@@ -69,7 +69,7 @@ export default {
         if (tweets.isFetching) {
             return false
         }
-        return tweets.didInvalidate
+        return !tweets.valid
     },
 
     fetchTweetsIfNeeded(topic) {

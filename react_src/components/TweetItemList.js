@@ -6,9 +6,13 @@ class TweetItemList extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.topic !== this.props.topic) {
-            const { dispatch, topic } = nextProps;
-            dispatch(actions.fetchTweetsIfNeeded(topic))
+            this.props.loadTweetsIfNeeded(nextProps.topic);
         }
+    }
+
+    onClick() {
+        let topic = this.props.topic;
+        this.props.refreshTopic(topic);
     }
 
     render() {
@@ -27,7 +31,7 @@ class TweetItemList extends Component {
         }
         return(
             <div>
-                <h3>Topic: {this.props.topic}</h3>
+                <h3>Topic: {this.props.topic} <a className="btn btn-default btn-small" onClick={this.onClick.bind(this)}>Refresh</a></h3>
                 {this.props.receivedAt ?
                     <p>Last updated at {new Date(this.props.receivedAt).toLocaleTimeString()}.</p>
                     : ''
