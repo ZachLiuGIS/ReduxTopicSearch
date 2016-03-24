@@ -1,7 +1,7 @@
 import actions from '../actions/actions';
 import actionTypes from '../constants/actionTypes';
 import constants from '../constants/constants';
-import { buildQueryParams, processTweetText } from '../utils/utils';
+import { buildQueryParams, processTweetText, extractTime } from '../utils/utils';
 
 export default {
     selectTopic(topic) {
@@ -27,10 +27,11 @@ export default {
                     username: item.user.name,
                     screenname: item.user.screen_name,
                     profileUrl: item.user.profile_image_url,
-                    createdAt: item.created_at,
+                    createdAt: extractTime(item.created_at),
                     text: processTweetText(item.text)
                 }
-            })
+            }),
+            receivedAt: Date.now()
         };
     },
 

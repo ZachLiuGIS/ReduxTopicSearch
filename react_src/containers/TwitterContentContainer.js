@@ -6,16 +6,18 @@ const mapStateToProps = (state) => {
     const { topic, tweets } = state;
     const {
         isFetching,
-        items
+        items,
+        receivedAt
         } = tweets[topic] || {
-        isFetching: true,
+        isFetching: false,
         items: []
     };
 
     return {
         topic,
         items,
-        isFetching
+        isFetching,
+        receivedAt
     }
 };
 

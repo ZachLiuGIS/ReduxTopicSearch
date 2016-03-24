@@ -26,3 +26,7 @@ export function convertUsernames(text) {
 export function processTweetText(text) {
     return convertUsernames(convertHashTags(convertLinks(text)));
 }
+
+export function extractTime(time) {
+    return time.split(" ").slice(0, -2).join(' ')
+}

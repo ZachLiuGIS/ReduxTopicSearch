@@ -16,7 +16,8 @@ const tweets = (state = {
         case actionTypes.REQUEST_TWEETS_SUCCESS:
             return update(state, {
                 isFetching: {$set: false},
-                items: {$set: action.items}
+                items: {$set: action.items},
+                receivedAt: {$set: action.receivedAt}
             });
         default:
             return state

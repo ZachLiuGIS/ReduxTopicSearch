@@ -12,15 +12,27 @@ class TweetItemList extends Component {
     }
 
     render() {
+        const isEmpty = this.props.items.length === 0;
+
         let tweetList = this.props.items.map((item, index)=> {
             return <TweetItem key={index} {...item} />
         });
-        if (this.props.isFetching) {
-            return <div>...Loading</div>
+
+        if (isEmpty) {
+            if (this.props.isFetching) {
+                return <div>...Loading</div>
+            } else {
+                return <div></div>
+            }
         }
         return(
             <div>
                 <h3>Topic: {this.props.topic}</h3>
+                {this.props.receivedAt ?
+                    <p>Last updated at {new Date(this.props.receivedAt).toLocaleTimeString()}.</p>
+                    : ''
+                }
+
                 <div className="list-group">{tweetList}</div>
             </div>
         )
