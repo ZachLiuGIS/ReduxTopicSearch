@@ -7,6 +7,7 @@ class SearchBox extends Component {
         e.preventDefault();
         let term = this.tbxSearchTerm.value;
         this.props.onBtnClick(term);
+        this.tbxSearchTerm.value = '';
     }
 
     render() {
@@ -14,7 +15,8 @@ class SearchBox extends Component {
             <form className="form search-box" onSubmit={this.onSearchSubmit.bind(this)}>
                 <div className="row">
                     <div className="form-group col-md-8">
-                        <input ref={node => this.tbxSearchTerm = node} type="text" className="form-control" placeholder="Topic"/>
+                        <input ref={node => this.tbxSearchTerm = node} type="text" className="form-control"
+                               placeholder="Topic"/>
                     </div>
                     <div className="col-md-4">
                         <button type="submit" className="btn btn-default">Search

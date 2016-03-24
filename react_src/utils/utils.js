@@ -24,6 +24,5 @@ export function convertUsernames(text) {
 }
 
 export function processTweetText(text) {
-    console.log(text);
     return convertUsernames(convertHashTags(convertLinks(text)));
 }

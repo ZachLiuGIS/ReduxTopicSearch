@@ -15,6 +15,9 @@ class TweetItemList extends Component {
         let tweetList = this.props.items.map((item, index)=> {
             return <TweetItem key={index} {...item} />
         });
+        if (this.props.isFetching) {
+            return <div>...Loading</div>
+        }
         return(
             <div>
                 <h3>Topic: {this.props.topic}</h3>

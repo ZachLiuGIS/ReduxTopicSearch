@@ -10,3 +10,11 @@ body {
 .tweet-list-item img {
     margin-top: 10px;
 }
+
+.history-sidebar {
+    margin-left: 50px;
+}
+
+.history-sidebar li {
+    list-style-type: none;
+}

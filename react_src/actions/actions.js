@@ -48,7 +48,8 @@ export default {
             dispatch(this.requestTweets(topic));
             return fetch(constants.TWITTER_SEARCH_URL + '?' + params)
                 .then(response => response.json())
-                .then(json => dispatch(this.requestTweetsSuccess(topic, json)));
+                .then(json => dispatch(this.requestTweetsSuccess(topic, json)))
+                .catch(error => dispatch(this.requestTweetsError(topic, error)));
         };
     }
 };
