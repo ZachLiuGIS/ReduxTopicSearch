@@ -11,6 +11,13 @@ export default {
         };
     },
 
+    invalidateTopic(topic) {
+        return {
+            type: actionTypes.INVALIDATE_TOPIC,
+            topic
+        }
+    },
+
     requestTweets(topic) {
         return {
             type: actionTypes.REQUEST_TWEETS,
@@ -52,5 +59,24 @@ export default {
                 .then(json => dispatch(this.requestTweetsSuccess(topic, json)))
                 .catch(error => dispatch(this.requestTweetsError(topic, error)));
         };
+    },
+
+    shouldFetchTweets(state, topic) {
+        const tweets = state.tweets[topic];
+        if (!tweets) {
+            return true
+        }
+        if (tweets.isFetching) {
+            return false
+        }
+        return tweets.didInvalidate
+    },
+
+    fetchTweetsIfNeeded(topic) {
+        return (dispatch, getState) => {
+            if (this.shouldFetchTweets(getState(), topic)) {
+                return dispatch(this.fetchTweets(topic))
+            }
+        }
     }
 };

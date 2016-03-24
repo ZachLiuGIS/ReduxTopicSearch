@@ -7,7 +7,7 @@ class TweetItemList extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.topic !== this.props.topic) {
             const { dispatch, topic } = nextProps;
-            dispatch(actions.fetchTweets(topic))
+            dispatch(actions.fetchTweetsIfNeeded(topic))
         }
     }
 

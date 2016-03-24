@@ -8,16 +8,23 @@ const tweets = (state = {
 }, action) => {
     switch (action.type) {
 
+        case actionTypes.INVALIDATE_TOPIC:
+            return update(state, {
+                didInvalidate: {$set: true}
+            });
+
         case actionTypes.REQUEST_TWEETS:
             return update(state, {
-                isFetching: {$set: true}
+                isFetching: {$set: true},
+                didInvalidate: {$set: false}
             });
 
         case actionTypes.REQUEST_TWEETS_SUCCESS:
             return update(state, {
                 isFetching: {$set: false},
                 items: {$set: action.items},
-                receivedAt: {$set: action.receivedAt}
+                receivedAt: {$set: action.receivedAt},
+                didInvalidate: {$set: false}
             });
         default:
             return state
